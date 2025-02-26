@@ -21,6 +21,7 @@ Bu proje, ürün kataloğu yönetimi için bir Spring Boot tabanlı backend API,
 - Özel hata yönetimi (Global Exception Handler)
 - Unit testler (JUnit & Mockito)
 - Swagger UI ile API dokümantasyonu
+- Versiyon Kontrol: Git & GitHub
 
 ## 🔧 Kurulum & Çalıştırma
 1. Projeyi klonlayın:
