@@ -1,4 +1,4 @@
-package com.muhammed.orhantekin.product_catalog_service.service.productservice.delete;
+package com.muhammed.orhantekin.product_catalog_service.service.productservice;
 
 import com.muhammed.orhantekin.product_catalog_service.base.BaseTest;
 import com.muhammed.orhantekin.product_catalog_service.exception.BaseException;
@@ -35,6 +35,7 @@ public class DeleteProductTests extends BaseTest {
     // 2. Geçersiz ID - Ürün Bulunamazsa Hata
     @Test
     public void testDeleteProduct_NotFound() {
+
         when(productRepository.findById(999L)).thenReturn(Optional.empty());
 
         BaseException exception = assertThrows(BaseException.class, () ->
@@ -42,7 +43,6 @@ public class DeleteProductTests extends BaseTest {
         );
 
         assertEquals("kayıt bulunamadı : Product not found with ID: 999", exception.getMessage());
-
         verify(productRepository, times(1)).findById(999L);
         verify(productRepository, never()).delete(any(Product.class));
     }
@@ -50,12 +50,12 @@ public class DeleteProductTests extends BaseTest {
     // 3. Null ID - ID Null ise Hata
     @Test
     public void testDeleteProduct_NullId() {
+
         BaseException exception = assertThrows(BaseException.class, () ->
                 productService.deleteProduct(null)
         );
 
         assertEquals("Geçersiz Giriş : ID must be greater than 0 and cannot be null", exception.getMessage());
-
         verify(productRepository, never()).findById(anyLong());
         verify(productRepository, never()).delete(any(Product.class));
     }
@@ -63,12 +63,12 @@ public class DeleteProductTests extends BaseTest {
     // 4. Boş ID (0) - Hata
     @Test
     public void testDeleteProduct_EmptyId() {
+
         BaseException exception = assertThrows(BaseException.class, () ->
                 productService.deleteProduct(0L)
         );
 
         assertEquals("Geçersiz Giriş : ID must be greater than 0 and cannot be null", exception.getMessage());
-
         verify(productRepository, never()).findById(anyLong());
         verify(productRepository, never()).delete(any(Product.class));
     }

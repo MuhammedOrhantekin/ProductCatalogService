@@ -84,6 +84,7 @@ public class GlobalExceptionHandler {
     // Hata Yanıtı Oluşturma
     private <E> ResponseEntity<ApiError<E>> buildErrorResponse(E message, HttpStatus status, WebRequest request) {
         ApiError<E> apiError = new ApiError<>();
+
         apiError.setStatus(status.value());
 
         Exceptionn<E> exceptionn = new Exceptionn<>();

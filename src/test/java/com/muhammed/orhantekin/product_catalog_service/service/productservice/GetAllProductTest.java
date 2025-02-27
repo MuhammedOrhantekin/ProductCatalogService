@@ -1,4 +1,4 @@
-package com.muhammed.orhantekin.product_catalog_service.service.productservice.get;
+package com.muhammed.orhantekin.product_catalog_service.service.productservice;
 
 import com.muhammed.orhantekin.product_catalog_service.base.BaseTest;
 import com.muhammed.orhantekin.product_catalog_service.dto.DtoProduct;
@@ -28,7 +28,6 @@ public class GetAllProductTest extends BaseTest {
 
         List<DtoProduct> result = productService.getAllProducts();
 
-        // Doğrulamalar
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals("Laptop", result.get(0).getName());
@@ -36,7 +35,6 @@ public class GetAllProductTest extends BaseTest {
         assertEquals("Phone", result.get(1).getName());
         assertEquals(800.0, result.get(1).getPrice());
 
-        // Verify işlemi
         verify(productRepository, times(1)).findAll();
     }
 

@@ -69,7 +69,6 @@
 		</dependency>
 
 
-
 		<!-- Hibernate Validator -->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>

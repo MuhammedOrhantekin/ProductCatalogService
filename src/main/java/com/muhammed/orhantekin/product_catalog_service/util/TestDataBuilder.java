@@ -11,16 +11,14 @@ import java.util.Set;
 
 public class TestDataBuilder {
 
-    // ------------------------------------
+
     // Varsayılan DTO Üretici
-    // ------------------------------------
     public static DtoProductIU createProductDto() {
         return createProductDto("Laptop", 1500.0, "High-end gaming laptop", "Electronics");
     }
 
-    // ------------------------------------
+
     // Özel DTO Üretici
-    // ------------------------------------
     public static DtoProductIU createProductDto(String name, double price, String description, String... categoryNames) {
         DtoProductIU dto = new DtoProductIU();
         dto.setName(name);
@@ -38,16 +36,16 @@ public class TestDataBuilder {
         return dto;
     }
 
-    // ------------------------------------
+
+
     // Varsayılan Product Entity Üretici
-    // ------------------------------------
     public static Product createProduct() {
         return createProduct(1L, "Laptop", 1500.0, "High-end gaming laptop", "Electronics");
     }
 
-    // ------------------------------------
+
+
     // Özel Product Entity Üretici
-    // ------------------------------------
     public static Product createProduct(Long id, String name, double price, String description, String... categoryNames) {
         Product product = new Product();
         product.setId(id);
@@ -66,9 +64,8 @@ public class TestDataBuilder {
         return product;
     }
 
-    // ------------------------------------
+
     // Kategori Üretici
-    // ------------------------------------
     public static Category createCategory(String name) {
         Category category = new Category();
         category.setId(1L);

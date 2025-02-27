@@ -53,8 +53,10 @@ public class ProductControllerTest {
         dtoProduct = new DtoProduct(1L, 1500.0, "Laptop", "High-end gaming laptop", Collections.emptySet());
     }
 
+
     // ---- GET ALL PRODUCTS ----
 
+    // Tüm ürünleri başarılı bir şekilde listeleme testidir.
     @Test
     public void testGetAllProducts_Success() throws Exception {
         when(productService.getAllProducts()).thenReturn(List.of(dtoProduct));
@@ -67,6 +69,7 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$[0].price").value(1500.0));
     }
 
+    // Eğer ürün listesi boşsa, API'nin doğru yanıt verdiğini test eder.
     @Test
     public void testGetAllProducts_EmptyList() throws Exception {
         when(productService.getAllProducts()).thenReturn(Collections.emptyList());
@@ -77,8 +80,11 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$").isEmpty());
     }
 
+
+
     // ---- GET PRODUCT BY ID ----
 
+    // Mevcut bir ürünün ID ile başarılı şekilde getirilmesini test eder.
     @Test
     public void testGetProductById_Success() throws Exception {
         when(productService.getProductById(1L)).thenReturn(dtoProduct);
@@ -90,6 +96,7 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.price").value(1500.0));
     }
 
+    // Geçersiz bir ID ile ürün çağrıldığında hata döndürmesini test eder.
     @Test
     public void testGetProductById_NotFound() throws Exception {
         when(productService.getProductById(999L)).thenThrow(new BaseException(
@@ -103,8 +110,11 @@ public class ProductControllerTest {
     }
 
 
+
+
     // ---- ADD PRODUCT ----
 
+    // Geçerli bir ürün ekleme isteğinin başarılı çalıştığını test eder.
     @Test
     public void testAddProduct_Success() throws Exception {
         when(productService.addProduct(any(DtoProductIU.class))).thenReturn(dtoProduct);
@@ -116,6 +126,7 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.name").value("Laptop"));
     }
 
+    // Geçersiz girişlerle ürün ekleme isteğinin başarısız olması gerektiğini test eder.
     @Test
     public void testAddProduct_InvalidInput() throws Exception {
         DtoProductIU invalidDto = new DtoProductIU("", 0.0, "", Collections.emptySet());
@@ -126,8 +137,12 @@ public class ProductControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+
+
+
     // ---- UPDATE PRODUCT ----
 
+    // Mevcut bir ürünün başarılı şekilde güncellenmesini test eder.
     @Test
     public void testUpdateProduct_Success() throws Exception {
         when(productService.updateProduct(eq(1L), any(DtoProductIU.class))).thenReturn(dtoProduct);
@@ -139,6 +154,7 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.name").value("Laptop"));
     }
 
+    // Güncellenmek istenen ürünün bulunamaması durumunda hata dönmesini test eder.
     @Test
     public void testUpdateProduct_NotFound() throws Exception {
         when(productService.updateProduct(eq(999L), any(DtoProductIU.class))).thenThrow(new BaseException(
@@ -152,8 +168,12 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.exceptionn.message").value("kayıt bulunamadı : Product not found"));
     }
 
+
+
+
     // ---- DELETE PRODUCT ----
 
+    // Var olan bir ürünün başarılı şekilde silindiğini test eder.
     @Test
     public void testDeleteProduct_Success() throws Exception {
         doNothing().when(productService).deleteProduct(1L);
@@ -163,6 +183,7 @@ public class ProductControllerTest {
                 .andExpect(content().string("Product deleted successfully."));
     }
 
+    // Silinmek istenen ürünün bulunamaması durumunda hata döndürmesini test eder.
     @Test
     public void testDeleteProduct_NotFound() throws Exception {
         doThrow(new BaseException(
@@ -174,8 +195,12 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.exceptionn.message").value("kayıt bulunamadı : Product not found"));
     }
 
+
+
+
     // ---- FILTER BY CATEGORY ----
 
+    // Belirli bir kategoriye ait ürünlerin başarılı şekilde listelendiğini test eder.
     @Test
     public void testGetProductsByCategory_Success() throws Exception {
         when(productService.getProductsByCategory("Electronics")).thenReturn(List.of(dtoProduct));
@@ -188,6 +213,8 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$[0].name").value("Laptop"));
     }
 
+
+    // Geçersiz bir kategori ile arama yapıldığında hata dönmesini test eder.
     @Test
     public void testGetProductsByCategory_NotFound() throws Exception {
         when(productService.getProductsByCategory("Unknown")).thenThrow(new BaseException(

@@ -1,4 +1,4 @@
-package com.muhammed.orhantekin.product_catalog_service.service.productservice.add;
+package com.muhammed.orhantekin.product_catalog_service.service.productservice;
 
 import com.muhammed.orhantekin.product_catalog_service.base.BaseTest;
 import com.muhammed.orhantekin.product_catalog_service.dto.DtoProduct;
@@ -19,7 +19,7 @@ public class AddProductTests extends BaseTest {
 
     // ---- ADD PRODUCT ----
 
-    // 1 Başarılı Ürün Ekleme
+    // Başarılı Ürün Ekleme testi
     @Test
     public void testAddProduct_Success() {
         DtoProductIU dto = TestDataBuilder.createProductDto();
@@ -36,7 +36,7 @@ public class AddProductTests extends BaseTest {
         verify(productRepository, times(1)).save(any(Product.class));
     }
 
-    // 2 Mevcut Kategori ile Ekleme
+    // Mevcut Kategori ile Ekleme testi
     @Test
     public void testAddProduct_WithExistingCategory() {
         DtoProductIU dto = TestDataBuilder.createProductDto("Laptop", 1500.0, "High-end gaming laptop", "Electronics");
@@ -54,7 +54,7 @@ public class AddProductTests extends BaseTest {
         verify(categoryRepository, times(1)).findByName("Electronics");
     }
 
-    // 3 Yeni Kategori ile Ekleme
+    // Yeni Kategori ile Ekleme testi
     @Test
     public void testAddProduct_WithNewCategory() {
         DtoProductIU dto = TestDataBuilder.createProductDto("Laptop", 1500.0, "High-end gaming laptop", "Gaming");

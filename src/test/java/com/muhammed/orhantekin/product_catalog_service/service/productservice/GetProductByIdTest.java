@@ -1,4 +1,4 @@
-package com.muhammed.orhantekin.product_catalog_service.service.productservice.get;
+package com.muhammed.orhantekin.product_catalog_service.service.productservice;
 
 import com.muhammed.orhantekin.product_catalog_service.base.BaseTest;
 import com.muhammed.orhantekin.product_catalog_service.dto.DtoProduct;

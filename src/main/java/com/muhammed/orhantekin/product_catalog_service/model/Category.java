@@ -1,10 +1,7 @@
 package com.muhammed.orhantekin.product_catalog_service.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter
@@ -13,10 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Category {
-
-    public Category(String name) {
-        this.name = name;
-    }
 
 
     @Id

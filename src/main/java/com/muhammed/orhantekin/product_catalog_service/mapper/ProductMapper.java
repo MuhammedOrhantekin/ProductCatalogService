@@ -14,9 +14,6 @@ public class ProductMapper {
 
     // Entity -> DTO (Product -> DtoProduct)
     public static DtoProduct toDto(Product product) {
-        if (product == null) {
-            return null;
-        }
 
         DtoProduct dto = new DtoProduct();
         dto.setId(product.getId());
@@ -24,7 +21,6 @@ public class ProductMapper {
         dto.setPrice(product.getPrice());
         dto.setDescription(product.getDescription());
 
-        // Kategorileri dönüştürme (null kontrolü ile)
         Set<DtoCategory> dtoCategories = new HashSet<>();
         if (product.getCategories() != null) {
             for (Category category : product.getCategories()) {
@@ -41,14 +37,13 @@ public class ProductMapper {
     }
 
 
-    // DTO -> Entity (DtoProductIU -> Product)
+    // DtoIU -> Entity (DtoProductIU -> Product)
     public static Product toEntity(DtoProductIU dto, CategoryRepository categoryRepository) {
         Product product = new Product();
         product.setName(dto.getName());
         product.setPrice(dto.getPrice());
         product.setDescription(dto.getDescription());
 
-        // Kategori kontrolü
         Set<Category> categories = new HashSet<>();
         if (dto.getCategories() != null) {
             for (DtoCategory dtoCategory : dto.getCategories()) {

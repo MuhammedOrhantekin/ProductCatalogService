@@ -1,6 +1,5 @@
 package com.muhammed.orhantekin.product_catalog_service.controller.impl;
 
-
 import com.muhammed.orhantekin.product_catalog_service.controller.IProductController;
 import com.muhammed.orhantekin.product_catalog_service.dto.DtoProduct;
 import com.muhammed.orhantekin.product_catalog_service.dto.DtoProductIU;
@@ -23,6 +22,7 @@ public class ProductControllerImpl implements IProductController {
     public ProductControllerImpl(IProductService productService) {
         this.productService = productService;
     }
+
 
     //Tüm Ürünleri listeleme
     @Operation(summary = "Get all products", description = "Returns a list of all products")

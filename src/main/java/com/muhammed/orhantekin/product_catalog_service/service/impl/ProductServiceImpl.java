@@ -41,6 +41,7 @@ public class ProductServiceImpl implements IProductService {
         return dtoProductList;
     }
 
+
     // ID'ye göre ürün getirme
     @Override
     public DtoProduct getProductById(Long id) {
@@ -63,6 +64,8 @@ public class ProductServiceImpl implements IProductService {
         return ProductMapper.toDto(savedProduct);
     }
 
+
+
     // Ürün güncelleme
     @Transactional
     @Override
@@ -70,14 +73,14 @@ public class ProductServiceImpl implements IProductService {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "Product not found with ID: " + id)));
 
-        // DTO'dan Entity dönüşümü
         Product updatedProduct = ProductMapper.toEntity(dtoProductIU, categoryRepository);
         updatedProduct.setId(existingProduct.getId());
 
-        // Güncellenen ürünü kaydet
         Product savedProduct = productRepository.save(updatedProduct);
         return ProductMapper.toDto(savedProduct);
     }
+
+
 
     // Ürün silme
     @Transactional
@@ -91,19 +94,19 @@ public class ProductServiceImpl implements IProductService {
         productRepository.delete(product);
     }
 
+
+    // Kategorilere göre Filtreleme
     @Override
     public List<DtoProduct> getProductsByCategory(String categoryName) {
-        // 1. Kategori var mı kontrol et
+
         Category category = categoryRepository.findByName(categoryName)
                 .orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "Category not found with name: " + categoryName)));
 
-        // 2. Kategori varsa, ürünleri getir
         List<Product> products = productRepository.findByCategoriesNameIgnoreCase(categoryName);
         if (products.isEmpty()) {
             throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "No products found for category: " + categoryName));
         }
 
-        // 3. DTO'ya dönüştür
         List<DtoProduct> dtoProductList = new ArrayList<>();
         for (Product product : products) {
             dtoProductList.add(ProductMapper.toDto(product));

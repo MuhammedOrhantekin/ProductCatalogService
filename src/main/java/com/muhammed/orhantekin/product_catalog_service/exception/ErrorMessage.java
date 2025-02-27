@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+// Hata mesajları, bir hata türü (`MessageType`) ve opsiyonel bir açıklama (`ofStatic`) içerebilir.
 @Getter
 @Setter
 @NoArgsConstructor
